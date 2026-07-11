@@ -87,7 +87,7 @@ self.isAutoScale = false;
 
 self.isCheckedSpecialSettings = false;
 
-self.IS_DEBUG = true;
+self.IS_DEBUG = false;
 self.IS_DRAW_DEBUG_SPRITES = false;
 self.IS_SHOW_NETWORKING_MESSAGES = false;
 
@@ -117,7 +117,9 @@ self.global_settings = {
 	bossHP: 1.00,
 	bossAmount: 1,
 	isUseVanillaEquipSystem: false,
-	lvlAmount: 30
+	lvlAmount: 30,
+	isCheatUnlockAllBosses: false,
+	isCheatUnlockAllEquip: false
 	};
 
 InitalizeDBRepository = function()
@@ -125,66 +127,73 @@ InitalizeDBRepository = function()
 	self.db = {
 		tabs: ["MAIN", "UPGRADES"],
 		current_tab: "MAIN",
-		
-		upgrades_list: {
-			"core": { id: "core", codename: "core", name: "CORE", spr: global.sprites.spr_solid_Core, sel_lvl: 0, is_unlocked: true },
-			"chainbelt": { id: "chainbelt", codename: "chainsaw", name: "CHAINBELT", spr: global.sprites.spr_solid_ChainBelt, sel_lvl: 0, is_unlocked: true },
-			"daggerglove": { id: "daggerglove", codename: "slash", name: "DAGGER GLOVE", spr: global.sprites.spr_solid_DaggerGlove, sel_lvl: 0, is_unlocked: true },
-			"eye2": { id: "eye2", codename: "laser", name: "EYE2", spr: global.sprites.spr_solid_Eye2, sel_lvl: 0, is_unlocked: true },
-			"injection": { id: "injection", codename: "injection", name: "INJECTION", spr: global.sprites.spr_solid_Injection, sel_lvl: 0, is_unlocked: true },
-			"battery": { id: "battery", codename: "battery", name: "ENERGIZING BATTERY", spr: global.sprites.spr_solid_Battery, sel_lvl: 0, is_unlocked: true },
-			"ivbag": { id: "ivbag", codename: "ivbag", name: "IV BAG", spr: global.sprites.spr_solid_IVBag, sel_lvl: 0, is_unlocked: true },
-			"crown": { id: "crown", codename: "crown", name: "PLEONEXIC CROWN", spr: global.sprites.spr_solid_Crown, sel_lvl: 0, is_unlocked: true },
-			"plague": { id: "plague", codename: "plague", name: "MASK OF PLAGUE", spr: global.sprites.spr_solid_PlagueMask, sel_lvl: 0, is_unlocked: true },
-			"legsaw": { id: "legsaw", codename: "sawblade", name: "LEGSAW", spr: global.sprites.spr_solid_LegSaw, sel_lvl: 0, is_unlocked: true },
-			"missile": { id: "missile", codename: "missile", name: "MISSILE PACK", spr: global.sprites.spr_solid_MissilePack, sel_lvl: 0, is_unlocked: true },
-			"parasight": { id: "parasight", codename: "parasite", name: "PARASIGHT", spr: global.sprites.spr_solid_ParaSight, sel_lvl: 0, is_unlocked: true },
-			"puckrack": { id: "puckrack", codename: "puck", name: "YOYO RACK", spr: global.sprites.spr_solid_Rotator, sel_lvl: 0, is_unlocked: true },
-			"bow": { id: "bow", codename: "dart", name: "HUNTER'S BOW", spr: global.sprites.spr_solid_Bow, sel_lvl: 0, is_unlocked: true },
-			"halo": { id: "halo", codename: "shield", name: "HALO", spr: global.sprites.spr_solid_Halo, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_halo },
-			"horns": { id: "horns", codename: "chomp", name: "HORNS", spr: global.sprites.spr_solid_Horns, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_horns },
-			"hydro": { id: "hydro", codename: "bouncy", name: "HYDROCILLATOR", spr: global.sprites.spr_solid_Hydrocillator, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_hydro },
-			"flamethrower": { id: "flamethrower", codename: "flamethrower", name: "FLAME THROWER", spr: global.sprites.spr_solid_Flamethrower, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_flamethrower },
-			"snowglobe": { id: "snowglobe", codename: "snowglobe", name: "FROST GLOBE", spr: global.sprites.spr_solid_SnowGlobe, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_snowglobe },
-			"plasmalamp": { id: "plasmalamp", codename: "plasma", name: "PLASMA LAMP", spr: global.sprites.spr_solid_Plasma, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_plasmalamp },
-			"satellite": { id: "satellite", codename: "satellite", name: "STATIC SATELLITE", spr: global.sprites.spr_solid_Satellite, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_satellite },
-			"walkman": { id: "walkman", codename: "dj", name: "WICKED WALKMAN", spr: global.sprites.spr_solid_Headphones, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_walkman },
-			"spear": { id: "spear", codename: "spear", name: "SOUL SPEAR", spr: global.sprites.spr_solid_Spear, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_spear },
-			"turret": { id: "turret", codename: "turret", name: "DEFENSE TURRET", spr: global.sprites.spr_solid_Turret, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_turret },
-			"ninja": { id: "ninja", codename: "ninja", name: "SHINOBI EQUIPMENT", spr: global.sprites.spr_solid_Ninja, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_ninjagear },
-			"strikecall": { id: "strikecall", codename: "strikecall", name: "STRIKE CALL", spr: global.sprites.spr_solid_Remote, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_strikecall },
-			"angelwings": { id: "angelwings", codename: "angelwings", name: "ANGEL WINGS", spr: global.sprites.spr_solid_AngelWings, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_angelwings },
-			"batwings": { id: "batwings", codename: "demonwings", name: "DEMON WINGS", spr: global.sprites.spr_solid_BatWings, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_demonwings },
-			"watch": { id: "watch", codename: "watch", name: "DIGIWATCH", spr: global.sprites.spr_solid_DigiWatch, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_digiwatch },
-			"engine": { id: "engine", codename: "engine", name: "OVERCHARGED ENGINE", spr: global.sprites.spr_solid_Engine, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_engine },
-			"c4": { id: "c4", codename: "c4", name: "VOLATILE C4", spr: global.sprites.spr_solid_C4, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_c4 },
-			"firelighter": { id: "firelighter", codename: "fire", name: "FIRE LIGHTER", spr: global.sprites.spr_solid_FireLighter, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_firelighter },
-			"sundae": { id: "sundae", codename: "ice", name: "FROSTY CONE", spr: global.sprites.spr_solid_IceCream, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_icecream },
-			"eel": { id: "eel", codename: "shock", name: "ELECTRIC EEL", spr: global.sprites.spr_solid_Eel, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_eel },
-			"crystal": { id: "crystal", codename: "crystal", name: "ELEMENT CRYSTAL", spr: global.sprites.spr_solid_Gem, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_gem },
-			"shrapnel": { id: "shrapnel", codename: "shrapnel", name: "SHRAPNEL SHELLS", spr: global.sprites.spr_solid_ShottyVest, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_shotvest },
-			"telecom": { id: "telecom", codename: "radio", name: "TELECOM", spr: global.sprites.spr_solid_Telecom, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_telecom },
-			"slimespike": { id: "slimespike", codename: "knife", name: "SLIME SPIKE", spr: global.sprites.spr_solid_SlimeSpike, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_slimespike },
-			"ultrabuster": { id: "ultrabuster", codename: "cannon", name: "ULTRABUSTER", spr: global.sprites.spr_solid_UltraBuster, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_ultrabuster },
-			"sword": { id: "sword", codename: "sword", name: "CHAINSWORD", spr: global.sprites.spr_solid_Sword, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_chainsword },
-			"popup": { id: "popup", codename: "popup", name: "POP UP FIREWALL", spr: global.sprites.spr_solid_Firewall, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_popup },
-			"death": { id: "death", codename: "death", name: "REAPER SCYTHE", spr: global.sprites.spr_solid_Death, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_scythe },
-			"corrupt": { id: "corrupt", codename: "corrupt", name: "CORRUPT TENTACLE", spr: global.sprites.spr_solid_Corrupt, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_tentacle },
-			"immunity": { id: "immunity", codename: "immune", name: "FANCY CIGAR", spr: global.sprites.spr_solid_Cigar, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_cigar },
-			"dynamite": { id: "dynamite", codename: "dynamite", name: "BLASTIN' STICKS", spr: global.sprites.spr_solid_Dynamite, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_dynamite },
-			"award": { id: "award", codename: "award", name: "MISSING AWARD", spr: global.sprites.spr_solid_Award, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_trophy },
-			"splash": { id: "splash", codename: "splash", name: "FUNKY CARROT", spr: global.sprites.spr_solid_Carrot, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_carrot },
-			"bees": { id: "bees", codename: "bee", name: "LOTS OF BEES", spr: global.sprites.spr_solid_Bees, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_bees },
-			"monkey": { id: "monkey", codename: "xpworth", name: "BLESSED MONKEY", spr: global.sprites.spr_solid_Monkey, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_monkey },
-			"midas": { id: "midas", codename: "midas", name: "MIDAS HAND", spr: global.sprites.spr_solid_Midas, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_midas },
-			"fish": { id: "fish", codename: "flydag", name: "DAGGERFISH CONCH", spr: global.sprites.spr_solid_Fish, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_fish },
-			"cheese": { id: "cheese", codename: "cluster", name: "STINKY CHEESE", spr: global.sprites.spr_solid_Cheese, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_cheese },
-			"psycho": { id: "psycho", codename: "helmet", name: "PSYCHO HELMET", spr: global.sprites.spr_solid_Psycho, sel_lvl: 0, is_unlocked: myStatTracker.unlocked_helmet },
-			"skateboard": { id: "skateboard", codename: "skateboard", name: "PRO SKATEBOARD", spr: global.sprites.spr_solid_placeholder, sel_lvl: 0, is_unlocked: true },
-			"bubble": { id: "bubble", codename: "bubble", name: "BULLET BUBBLE", spr: global.sprites.spr_solid_placeholder, sel_lvl: 0, is_unlocked: true }
-		},
-		
-		upgrades_order: [
+		upgrades_list: {},		
+		upgrades_order: []
+	};
+	InitializeUpgradesList();
+	UpdateEquipUnlockStatus();
+};
+
+InitializeUpgradesList = function()
+{
+	self.db.upgrades_list =
+	{
+		"core": { id: "core", codename: "core", name: "CORE", spr: global.sprites.spr_solid_Core, sel_lvl: 0, is_unlocked: true },
+		"chainbelt": { id: "chainbelt", codename: "chainsaw", name: "CHAINBELT", spr: global.sprites.spr_solid_ChainBelt, sel_lvl: 0, is_unlocked: true },
+		"daggerglove": { id: "daggerglove", codename: "slash", name: "DAGGER GLOVE", spr: global.sprites.spr_solid_DaggerGlove, sel_lvl: 0, is_unlocked: true },
+		"eye2": { id: "eye2", codename: "laser", name: "EYE2", spr: global.sprites.spr_solid_Eye2, sel_lvl: 0, is_unlocked: true },
+		"injection": { id: "injection", codename: "injection", name: "INJECTION", spr: global.sprites.spr_solid_Injection, sel_lvl: 0, is_unlocked: true },
+		"battery": { id: "battery", codename: "battery", name: "ENERGIZING BATTERY", spr: global.sprites.spr_solid_Battery, sel_lvl: 0, is_unlocked: true },
+		"ivbag": { id: "ivbag", codename: "ivbag", name: "IV BAG", spr: global.sprites.spr_solid_IVBag, sel_lvl: 0, is_unlocked: true },
+		"crown": { id: "crown", codename: "crown", name: "PLEONEXIC CROWN", spr: global.sprites.spr_solid_Crown, sel_lvl: 0, is_unlocked: true },
+		"plague": { id: "plague", codename: "plague", name: "MASK OF PLAGUE", spr: global.sprites.spr_solid_PlagueMask, sel_lvl: 0, is_unlocked: true },
+		"legsaw": { id: "legsaw", codename: "sawblade", name: "LEGSAW", spr: global.sprites.spr_solid_LegSaw, sel_lvl: 0, is_unlocked: true },
+		"missile": { id: "missile", codename: "missile", name: "MISSILE PACK", spr: global.sprites.spr_solid_MissilePack, sel_lvl: 0, is_unlocked: true },
+		"parasight": { id: "parasight", codename: "parasite", name: "PARASIGHT", spr: global.sprites.spr_solid_ParaSight, sel_lvl: 0, is_unlocked: true },
+		"puckrack": { id: "puckrack", codename: "puck", name: "YOYO RACK", spr: global.sprites.spr_solid_Rotator, sel_lvl: 0, is_unlocked: true },
+		"bow": { id: "bow", codename: "dart", name: "HUNTER'S BOW", spr: global.sprites.spr_solid_Bow, sel_lvl: 0, is_unlocked: true },
+		"halo": { id: "halo", codename: "shield", name: "HALO", spr: global.sprites.spr_solid_Halo, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_halo" },
+		"horns": { id: "horns", codename: "chomp", name: "HORNS", spr: global.sprites.spr_solid_Horns, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_horns" },
+		"hydro": { id: "hydro", codename: "bouncy", name: "HYDROCILLATOR", spr: global.sprites.spr_solid_Hydrocillator, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_hydro" },
+		"flamethrower": { id: "flamethrower", codename: "flamethrower", name: "FLAME THROWER", spr: global.sprites.spr_solid_Flamethrower, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_flamethrower" },
+		"snowglobe": { id: "snowglobe", codename: "snowglobe", name: "FROST GLOBE", spr: global.sprites.spr_solid_SnowGlobe, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_snowglobe" },
+		"plasmalamp": { id: "plasmalamp", codename: "plasma", name: "PLASMA LAMP", spr: global.sprites.spr_solid_Plasma, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_plasmalamp" },
+		"satellite": { id: "satellite", codename: "satellite", name: "STATIC SATELLITE", spr: global.sprites.spr_solid_Satellite, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_satellite" },
+		"walkman": { id: "walkman", codename: "dj", name: "WICKED WALKMAN", spr: global.sprites.spr_solid_Headphones, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_walkman" },
+		"spear": { id: "spear", codename: "spear", name: "SOUL SPEAR", spr: global.sprites.spr_solid_Spear, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_spear" },
+		"turret": { id: "turret", codename: "turret", name: "DEFENSE TURRET", spr: global.sprites.spr_solid_Turret, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_turret" },
+		"ninja": { id: "ninja", codename: "ninja", name: "SHINOBI EQUIPMENT", spr: global.sprites.spr_solid_Ninja, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_ninjagear" },
+		"strikecall": { id: "strikecall", codename: "strikecall", name: "STRIKE CALL", spr: global.sprites.spr_solid_Remote, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_strikecall" },
+		"angelwings": { id: "angelwings", codename: "angelwings", name: "ANGEL WINGS", spr: global.sprites.spr_solid_AngelWings, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_angelwings" },
+		"batwings": { id: "batwings", codename: "demonwings", name: "DEMON WINGS", spr: global.sprites.spr_solid_BatWings, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_demonwings" },
+		"watch": { id: "watch", codename: "watch", name: "DIGIWATCH", spr: global.sprites.spr_solid_DigiWatch, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_digiwatch" },
+		"engine": { id: "engine", codename: "engine", name: "OVERCHARGED ENGINE", spr: global.sprites.spr_solid_Engine, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_engine" },
+		"c4": { id: "c4", codename: "c4", name: "VOLATILE C4", spr: global.sprites.spr_solid_C4, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_c4" },
+		"firelighter": { id: "firelighter", codename: "fire", name: "FIRE LIGHTER", spr: global.sprites.spr_solid_FireLighter, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_firelighter" },
+		"sundae": { id: "sundae", codename: "ice", name: "FROSTY CONE", spr: global.sprites.spr_solid_IceCream, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_icecream" },
+		"eel": { id: "eel", codename: "shock", name: "ELECTRIC EEL", spr: global.sprites.spr_solid_Eel, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_eel" },
+		"crystal": { id: "crystal", codename: "crystal", name: "ELEMENT CRYSTAL", spr: global.sprites.spr_solid_Gem, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_gem" },
+		"shrapnel": { id: "shrapnel", codename: "shrapnel", name: "SHRAPNEL SHELLS", spr: global.sprites.spr_solid_ShottyVest, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_shotvest" },
+		"telecom": { id: "telecom", codename: "radio", name: "TELECOM", spr: global.sprites.spr_solid_Telecom, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_telecom" },
+		"slimespike": { id: "slimespike", codename: "knife", name: "SLIME SPIKE", spr: global.sprites.spr_solid_SlimeSpike, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_slimespike" },
+		"ultrabuster": { id: "ultrabuster", codename: "cannon", name: "ULTRABUSTER", spr: global.sprites.spr_solid_UltraBuster, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_ultrabuster" },
+		"sword": { id: "sword", codename: "sword", name: "CHAINSWORD", spr: global.sprites.spr_solid_Sword, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_chainsword" },
+		"popup": { id: "popup", codename: "popup", name: "POP UP FIREWALL", spr: global.sprites.spr_solid_Firewall, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_popup" },
+		"death": { id: "death", codename: "death", name: "REAPER SCYTHE", spr: global.sprites.spr_solid_Death, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_scythe" },
+		"corrupt": { id: "corrupt", codename: "corrupt", name: "CORRUPT TENTACLE", spr: global.sprites.spr_solid_Corrupt, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_tentacle" },
+		"immunity": { id: "immunity", codename: "immune", name: "FANCY CIGAR", spr: global.sprites.spr_solid_Cigar, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_cigar" },
+		"dynamite": { id: "dynamite", codename: "dynamite", name: "BLASTIN' STICKS", spr: global.sprites.spr_solid_Dynamite, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_dynamite" },
+		"award": { id: "award", codename: "award", name: "MISSING AWARD", spr: global.sprites.spr_solid_Award, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_trophy" },
+		"splash": { id: "splash", codename: "splash", name: "FUNKY CARROT", spr: global.sprites.spr_solid_Carrot, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_carrot" },
+		"bees": { id: "bees", codename: "bee", name: "LOTS OF BEES", spr: global.sprites.spr_solid_Bees, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_bees" },
+		"monkey": { id: "monkey", codename: "xpworth", name: "BLESSED MONKEY", spr: global.sprites.spr_solid_Monkey, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_monkey" },
+		"midas": { id: "midas", codename: "midas", name: "MIDAS HAND", spr: global.sprites.spr_solid_Midas, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_midas" },
+		"fish": { id: "fish", codename: "flydag", name: "DAGGERFISH CONCH", spr: global.sprites.spr_solid_Fish, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_fish" },
+		"cheese": { id: "cheese", codename: "cluster", name: "STINKY CHEESE", spr: global.sprites.spr_solid_Cheese, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_cheese" },
+		"psycho": { id: "psycho", codename: "helmet", name: "PSYCHO HELMET", spr: global.sprites.spr_solid_Psycho, sel_lvl: 0, is_unlocked: false, stat_name: "unlocked_helmet" }
+	};
+	self.db.upgrades_order =
+		[
 			"core",
 			"chainbelt",
 			"daggerglove",
@@ -237,33 +246,57 @@ InitalizeDBRepository = function()
 			"midas",
 			"fish",
 			"cheese",
-			"psycho",
-			"skateboard",
-			"bubble"
-		]
-	};
-};
+			"psycho"
+		];
+	if (IS_DEBUG)
+	{
+		self.db.upgrades_list.skateboard = { id: "skateboard", codename: "skateboard", name: "PRO SKATEBOARD", spr: global.sprites.spr_solid_placeholder, sel_lvl: 0, is_unlocked: true };		
+		self.db.upgrades_list.bubble = { id: "bubble", codename: "bubble", name: "BULLET BUBBLE", spr: global.sprites.spr_solid_placeholder, sel_lvl: 0, is_unlocked: true };
+	
+		array_push(self.db.upgrades_order, "skateboard", "bubble");
+	}
+}
+
+UpdateEquipUnlockStatus = function()
+{
+	var is_cheat_active = global.GodHome.global_settings.isCheatUnlockAllEquip;
+	var keys = variable_struct_get_names(self.db.upgrades_list);
+	var keys_length = array_length(keys);
+	
+	for (var i = 0; i < keys_length; i += 1)
+	{
+		var key = keys[i];
+		var item = self.db.upgrades_list[$ key];
+		
+		if (variable_struct_exists(item, "stat_name"))
+		{
+			var stat_unlocked = variable_instance_get(myStatTracker, item.stat_name);
+			
+			item.is_unlocked = stat_unlocked || is_cheat_active;
+		}
+	}
+}
 
 InitializeBossList = function()
 {
 	self.db.bossList = [
-		{ code: "obj_boss_rabbit",  		start: obj_boss_rabbit,  		   unlocked: myStatTracker.stat_bunny_kills > 0 or IS_DEBUG,       sprite: global.sprites.spr_Gremlin_Move_SE,         scale_mod: 1.2, x_offset: 0, y_offset: 0},
-		{ code: "obj_boss_worm",    		start: obj_boss_worm_manager,      unlocked: myStatTracker.stat_worm_kills > 0 or IS_DEBUG,        sprite: global.sprites.spr_Worm_4_NE,               scale_mod: 1.5, x_offset: 0, y_offset: -5},
-		{ code: "obj_boss_biker",   		start: obj_boss_biker,   		   unlocked: myStatTracker.stat_biker_kills > 0 or IS_DEBUG,       sprite: global.sprites.spr_Biker_Idle_SE,           scale_mod: 1.0, x_offset: 0, y_offset: 0},
-		{ code: "obj_boss_demon",  			start: obj_boss_demon,   		   unlocked: myStatTracker.stat_demon_kills > 0 or IS_DEBUG,       sprite: global.sprites.spr_Demon_Idle_SE,           scale_mod: 0.8, x_offset: 0, y_offset: 0},
-		{ code: "obj_boss_picayune_full", 	start: obj_boss_picayune,          unlocked: myStatTracker.stat_picayune_kills > 0 or IS_DEBUG,    sprite: noone,                                      scale_mod: 0.8, x_offset: 0, y_offset: 0},
-		{ code: "obj_boss_picayune",        start: obj_boss_picayune,          unlocked: myStatTracker.stat_picayune_kills > 0 or IS_DEBUG,    sprite: global.sprites.spr_picayune_faces,          scale_mod: 1.0, x_offset: 0, y_offset: 0},
-		{ code: "obj_boss_picayune_eye",    start: obj_boss_picayune_eye,      unlocked: myStatTracker.stat_picayune_kills > 0 or IS_DEBUG,    sprite: noone,                                      scale_mod: 1.0, x_offset: 0, y_offset: 0},
-		{ code: "obj_boss_true_picayune",   start: obj_boss_true_picayune,     unlocked: myStatTracker.stat_picayune_kills > 0 or IS_DEBUG,    sprite: global.sprites.spr_picayune_idle_se,        scale_mod: 1.0, x_offset: 0, y_offset: 0},
-		{ code: "obj_ab_rabbit",    		start: obj_ab_rabbit,   		   unlocked: myStatTracker.stat_ab_bunny_kills > 0 or IS_DEBUG,    sprite: global.sprites.spr_AB_Gremlin_Move_SE,      scale_mod: 1.0, x_offset: 0, y_offset: 0},
-		{ code: "obj_ab_worm",              start: obj_ab_worm_manager, 	   unlocked: myStatTracker.stat_ab_worm_kills > 0 or IS_DEBUG,     sprite: global.sprites.spr_AB_Worm_Stomach_NE,      scale_mod: 1.2, x_offset: 0, y_offset: -1},
-		{ code: "obj_ab_biker",     		start: obj_ab_biker,  		   	   unlocked: myStatTracker.stat_ab_biker_kills > 0 or IS_DEBUG,    sprite: global.sprites.spr_AB_Biker_Drive_SE,       scale_mod: 2.0, x_offset: 0, y_offset: 0},
-		{ code: "obj_ab_demon",     		start: obj_ab_demon,     		   unlocked: myStatTracker.stat_ab_demon_kills > 0 or IS_DEBUG,    sprite: global.sprites.spr_AB_Demon_Idle_SE,        scale_mod: 1.0, x_offset: 0, y_offset: 0},
-		{ code: "picayune",     		    start: picayune,     		   	   unlocked: myStatTracker.stat_ab_picayune_kills > 0 or IS_DEBUG, sprite: global.sprites.spr_dialog_picayune_ab_idle, scale_mod: 2.0, x_offset: -60, y_offset: 0},
-		{ code: "obj_boss_yuki",   		    start: obj_boss_yuki,   		   unlocked: myStatTracker.stat_yuki_kills > 0 or IS_DEBUG,        sprite: global.sprites.spr_Yuki_Idle_SE,            scale_mod: 1.5, x_offset: 0, y_offset: 0},
-		{ code: "obj_boss_ghost",   		start: obj_boss_ghost,   		   unlocked: myStatTracker.stat_ghost_kills > 0 or IS_DEBUG,       sprite: global.sprites.spr_Ghost_Idle_SE,           scale_mod: 1.0, x_offset: 0, y_offset: 0},
-		{ code: "obj_boss_diver",  			start: obj_boss_diver,   		   unlocked: myStatTracker.stat_diver_kills > 0 or IS_DEBUG,       sprite: global.sprites.spr_Diver_Idle_SE,           scale_mod: 1.0, x_offset: 0, y_offset: 0},
-		{ code: "obj_boss_umi",     		start: obj_boss_umi,     		   unlocked: myStatTracker.stat_umi_kills > 0 or IS_DEBUG,         sprite: global.sprites.spr_Umi_Idle,                scale_mod: 1.0, x_offset: 0, y_offset: 0}
+		{ code: "obj_boss_rabbit",  		start: obj_boss_rabbit,  		   unlocked: myStatTracker.stat_bunny_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,         sprite: global.sprites.spr_Gremlin_Move_SE,         scale_mod: 1.2, x_offset: 0, y_offset: 0},
+		{ code: "obj_boss_worm",    		start: obj_boss_worm_manager,      unlocked: myStatTracker.stat_worm_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,          sprite: global.sprites.spr_Worm_4_NE,               scale_mod: 1.5, x_offset: 0, y_offset: -5},
+		{ code: "obj_boss_biker",   		start: obj_boss_biker,   		   unlocked: myStatTracker.stat_biker_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,         sprite: global.sprites.spr_Biker_Idle_SE,           scale_mod: 1.0, x_offset: 0, y_offset: 0},
+		{ code: "obj_boss_demon",  			start: obj_boss_demon,   		   unlocked: myStatTracker.stat_demon_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,         sprite: global.sprites.spr_Demon_Idle_SE,           scale_mod: 0.8, x_offset: 0, y_offset: 0},
+		{ code: "obj_boss_picayune_full", 	start: obj_boss_picayune,          unlocked: myStatTracker.stat_picayune_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,      sprite: noone,                                      scale_mod: 0.8, x_offset: 0, y_offset: 0},
+		{ code: "obj_boss_picayune",        start: obj_boss_picayune,          unlocked: myStatTracker.stat_picayune_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,      sprite: global.sprites.spr_picayune_faces,          scale_mod: 1.0, x_offset: 0, y_offset: 0},
+		{ code: "obj_boss_picayune_eye",    start: obj_boss_picayune_eye,      unlocked: myStatTracker.stat_picayune_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,      sprite: noone,                                      scale_mod: 1.0, x_offset: 0, y_offset: 0},
+		{ code: "obj_boss_true_picayune",   start: obj_boss_true_picayune,     unlocked: myStatTracker.stat_picayune_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,      sprite: global.sprites.spr_picayune_idle_se,        scale_mod: 1.0, x_offset: 0, y_offset: 0},
+		{ code: "obj_ab_rabbit",    		start: obj_ab_rabbit,   		   unlocked: myStatTracker.stat_ab_bunny_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,      sprite: global.sprites.spr_AB_Gremlin_Move_SE,      scale_mod: 1.0, x_offset: 0, y_offset: 0},
+		{ code: "obj_ab_worm",              start: obj_ab_worm_manager, 	   unlocked: myStatTracker.stat_ab_worm_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,       sprite: global.sprites.spr_AB_Worm_Stomach_NE,      scale_mod: 1.2, x_offset: 0, y_offset: -1},
+		{ code: "obj_ab_biker",     		start: obj_ab_biker,  		   	   unlocked: myStatTracker.stat_ab_biker_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,      sprite: global.sprites.spr_AB_Biker_Drive_SE,       scale_mod: 2.0, x_offset: 0, y_offset: 0},
+		{ code: "obj_ab_demon",     		start: obj_ab_demon,     		   unlocked: myStatTracker.stat_ab_demon_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,      sprite: global.sprites.spr_AB_Demon_Idle_SE,        scale_mod: 1.0, x_offset: 0, y_offset: 0},
+		{ code: "picayune",     		    start: picayune,     		   	   unlocked: myStatTracker.stat_ab_picayune_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,   sprite: global.sprites.spr_dialog_picayune_ab_idle, scale_mod: 2.0, x_offset: -60, y_offset: 0},
+		{ code: "obj_boss_yuki",   		    start: obj_boss_yuki,   		   unlocked: myStatTracker.stat_yuki_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,          sprite: global.sprites.spr_Yuki_Idle_SE,            scale_mod: 1.5, x_offset: 0, y_offset: 0},
+		{ code: "obj_boss_ghost",   		start: obj_boss_ghost,   		   unlocked: myStatTracker.stat_ghost_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,         sprite: global.sprites.spr_Ghost_Idle_SE,           scale_mod: 1.0, x_offset: 0, y_offset: 0},
+		{ code: "obj_boss_diver",  			start: obj_boss_diver,   		   unlocked: myStatTracker.stat_diver_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,         sprite: global.sprites.spr_Diver_Idle_SE,           scale_mod: 1.0, x_offset: 0, y_offset: 0},
+		{ code: "obj_boss_umi",     		start: obj_boss_umi,     		   unlocked: myStatTracker.stat_umi_kills > 0 || global.GodHome.global_settings.isCheatUnlockAllBosses,           sprite: global.sprites.spr_Umi_Idle,                scale_mod: 1.0, x_offset: 0, y_offset: 0}
 	];	
 };
 
@@ -384,6 +417,15 @@ GetTrueFalseText = function(boolVar)
 	{
 		return "FALSE";
 	}
+}
+
+ShowCheatToggleEffect = function()
+{
+	playsnd(global.sounds.snd_Upgrade_Purchase, 2, false, 0.5);
+	playsnd(global.sounds.snd_Menu_Open_1, 2, false, 1);
+	screenshake(10, 10);
+	var grid_eff = CreateModObject(global.screenw / 2, global.screenh / 2, -9999, ModObjectType.AnimationPlayerRainbow);
+	grid_eff.sprite_index = global.sprites.spr_screen_upgrade_grid;
 }
 
 DrawGodHomeStats = function()
@@ -897,6 +939,12 @@ GotoRoomGodhome = function()
 	ftr.rm = global.rm_godhome;
 }
 
+GotoRoomMainMenu = function()
+{
+    var ftr = instance_create_depth(0, 0, -9999999, obj_fadetoroom);
+    ftr.rm = rm_mainmenu;
+}
+
 GodHomeRoomUpdate = function()
 {
 	if (self.is_transitioning_to_gh_settings && room == global.rm_godhome)
@@ -1206,16 +1254,13 @@ InitGHGameState = function()
 InitGHPlayerState = function()
 {
 	global.ds_enemieskilled = 1;
-	if (IS_DEBUG)
-	{		
-		var keys = variable_struct_get_names(self.db.upgrades_list);
-		var total_items = array_length(keys);
-		for (var i = 0; i < total_items; i+=1)
-		{
-			var key = keys[i];
-			var item = self.db.upgrades_list[$ key];
-			set_player_item_amount_by_id(myPlayer, item.id, item.sel_lvl);		
-		}
+	var keys = variable_struct_get_names(self.db.upgrades_list);
+	var total_items = array_length(keys);
+	for (var i = 0; i < total_items; i+=1)
+	{
+		var key = keys[i];
+		var item = self.db.upgrades_list[$ key];
+		set_player_item_amount_by_id(myPlayer, item.id, item.sel_lvl);		
 	}
 	isInitPlayerState = true;
 }
@@ -1669,7 +1714,7 @@ ResetBossAmountVar = function()
 
 DecreaseLvlAmountVar = function()
 {
-	if (global.GodHome.global_settings.lvlAmount > 1)
+	if (global.GodHome.global_settings.lvlAmount > 0)
 	{
 		global.GodHome.global_settings.lvlAmount -= 1;
 	}
@@ -1682,7 +1727,7 @@ IncreaseLvlAmountVar = function()
 
 ResetLvlAmountVar = function()
 {
-	global.GodHome.global_settings.lvlAmount = 1;
+	global.GodHome.global_settings.lvlAmount = 0;
 }
 
 DecreaseItemsAmountVar = function()
@@ -1784,7 +1829,8 @@ instance_mod_exists = function(obj_type_, inst_type)
 
 ModObjectType =
 {
-	SettingsMenu: 1000
+	SettingsMenu: 1000,
+	AnimationPlayerRainbow: 1001
 }
 
 CreateModObject = function(x_, y_, depth_, type, struct)
@@ -1806,6 +1852,13 @@ CreateModObject = function(x_, y_, depth_, type, struct)
 		inst.OnSettingsMenuStart = method(inst, OnSettingsMenuStart);
 		inst.OnTabChange = method(inst, OnSettingsMenuTabChange);
 	}
+	else if (type == ModObjectType.AnimationPlayerRainbow)
+	{
+		inst.sprite_index = global.sprites.spr_nothing;
+		inst.is_loop = false;
+		inst.image_speed = 1;
+		inst.OnDraw = method(inst, OnAnimationPlayerRainbowDraw);
+	}
 	
 	if (variable_instance_exists(inst, "OnCustomCreate"))
 	{
@@ -1820,6 +1873,22 @@ CreateModObject = function(x_, y_, depth_, type, struct)
         variable_instance_set(inst, key, val);
     }
 	return inst;	
+}
+
+/////////
+//AnimationPlayerRainbowDraw
+////////
+
+OnAnimationPlayerRainbowDraw = function()
+{
+	var rainbow_color = c_rainbow(get_timer() / 10000);
+	gpu_set_fog(true, rainbow_color, 0, 0);
+	draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white, image_alpha);
+	gpu_set_fog(false, c_black, 0, 0);
+	if (!self.is_loop && image_number > 1 && (image_index >= image_number - 1))
+    {
+        instance_destroy();
+    }
 }
 
 /////////
@@ -1900,7 +1969,7 @@ OnSettingsMenuCreate = function()
 	self.labelBossAnountReset = noone;
 	self.labelBossAmountValue = noone;
 	self.arrowBossAmountAdd = noone;
-	self.arrowBossAmountSub = noone;
+	self.arrowBossAmountSub = noone;	
 	///////////////////////////
 
 	///////////////////////////
@@ -1918,9 +1987,24 @@ OnSettingsMenuCreate = function()
 	self.labelItemsSubBig = noone;	
 	self.labelItemsAdd = noone;
 	self.labelItemsAddBig = noone;
-	self.labelItemsReset = noone;
+	self.labelItemsReset = noone;	
 	///////////////////////////
 
+	///////////////////////////
+	//Cheats
+	///////////////////////////
+	self.godHomeToggleBossUnlockCheat = noone;
+	self.godHomeToggleEquipUnlockCheat = noone;
+	///////////////////////////
+	
+	//////////////////////////
+	//Close Button
+	//////////////////////////
+	self.btnCloseX = 100;
+	self.btnCloseY = 40;
+	self.btnCloseHover = false;
+	//////////////////////////
+	
 	///////////////////////////
 	//Credits
 	///////////////////////////		
@@ -1928,6 +2012,7 @@ OnSettingsMenuCreate = function()
 	self.buttonGithubCredits = noone;
 	///////////////////////////			
 	
+	//REMOVE	
 	self.sub_btn_layout = [
 		{ name: "sub",   label: "-",  rx: 10,                  ry: self.item_size + 10, hold: true },
 		{ name: "add",   label: "+",  rx: self.item_size - 10, ry: self.item_size + 10, hold: true },
@@ -1941,8 +2026,10 @@ OnSettingsMenuCreate = function()
 	
 	self.held_btn_id = -1;
 
-	RefreshCachedUpgradesList = method(self, global.GodHome.SettingsMenuRefreshCachedUpgradesList);
-	RefreshCachedUpgradesList();
+	self.RefreshCachedUpgradesList = method(self, global.GodHome.SettingsMenuRefreshCachedUpgradesList);
+	self.RefreshCachedUpgradesList();
+	
+	self.CheatRefreshEquipUnlock = method(self, global.GodHome.CheatRefreshEquipUnlock);
 	
 	OnTabChange(old_tab, db_ref.current_tab);
 	OnSettingsMenuStart();
@@ -1950,6 +2037,7 @@ OnSettingsMenuCreate = function()
 
 SettingsMenuRefreshCachedUpgradesList = function()
 {
+	global.GodHome.UpdateEquipUnlockStatus();
 	self.cached_upgrades = [];
 	self.equip_list_order_len = array_length(self.db_ref.upgrades_order);
 	for (var i = 0; i < equip_list_order_len; i+=1)
@@ -1958,6 +2046,20 @@ SettingsMenuRefreshCachedUpgradesList = function()
 	    array_push(self.cached_upgrades, self.db_ref.upgrades_list[$ key]);
 	}
 }
+
+
+CheatRefreshBossesUnlock = function()
+{
+	global.GodHome.ShowCheatToggleEffect();
+	global.GodHome.InitializeBossList();
+}
+
+CheatRefreshEquipUnlock = function()
+{
+	global.GodHome.ShowCheatToggleEffect();
+	self.RefreshCachedUpgradesList();
+}
+
 
 OnSettingsMenuStart = function()
 {
@@ -2014,7 +2116,36 @@ OnSettingsMenuStep = function()
 	var click_hold = mouse_check_button(mb_left) || global.gp_accept;
 	var var_Screenw = global.screenw;
     var var_Screenh = global.screenh;
+	
+	var spr = global.sprites.spr_skilltree_close;
+	var exit_btn_width = sprite_get_width(spr);
+	var exit_btn_height = sprite_get_height(spr);
 
+	var exit_btn_xoff = sprite_get_xoffset(spr);
+	var exit_btn_yoff = sprite_get_yoffset(spr);
+
+	var actual_btn_x = global.camx + self.btnCloseX;
+	var actual_btn_y = global.camy + self.btnCloseY;
+
+	var hitbox_left = actual_btn_x - exit_btn_xoff;
+	var hitbox_top = actual_btn_y - exit_btn_yoff;
+	var hitbox_right = hitbox_left + exit_btn_width;
+	var hitbox_bottom = hitbox_top + exit_btn_height;
+
+	if (mx >= hitbox_left && mx <= hitbox_right && my >= hitbox_top && my <= hitbox_bottom)
+	{
+		self.btnCloseHover = true;
+		if (click)
+		{	
+			audio_play_sound(snd_menu_click, 999, false);
+			global.GodHome.GotoRoomMainMenu();
+		}
+	}
+	else
+	{
+		self.btnCloseHover = false;
+	}
+	
     var tab_w = 120;
     for (var i = 0; i < array_length(self.db_ref.tabs); i+=1)
 	{
@@ -2023,12 +2154,13 @@ OnSettingsMenuStep = function()
         
         if (mx >= tx && mx <= tx + tab_w && my >= ty && my <= ty + 40)
 		{
+
             if (click)
 			{
                 self.db_ref.current_tab = self.db_ref.tabs[i];
                 audio_play_sound(snd_crit, 999, false);
             }
-        }
+        }	
     }
 	
 	if (old_tab != db_ref.current_tab)
@@ -2145,75 +2277,95 @@ OnSettingsMenuStep = function()
 	}
 	else if (self.db_ref.current_tab == "UPGRADES")
     {
-        var btn_count = array_length(self.sub_btn_layout); 
+        var _camx = global.camx;
+        var _camy = global.camy;
+        var _item_size = self.item_size;
+        var _pad = self.item_pad;
+        var _cols = self.grid_cols;
+        var _left_pad = self.upgrades_left_pad;
+        var _scroll_y = self.scroll_y;
+        var _screenh = global.screenh;
 
-        for (var i = 0; i < total_items; i+=1)
+        var base_y = _camy + 100 - _scroll_y;
+        var item_stride = _item_size + _pad;
+        var y_stride = item_stride + 10;
+        var cull_top = _camy - (_item_size + 10);
+        var cull_bottom = _camy + _screenh;
+        var total_items = array_length(self.cached_upgrades);
+
+        for (var i = 0; i < total_items; i += 1)
         {
-            var row = i div self.grid_cols;
-            var iy = global.camy + 100 + (row * (self.item_size + self.item_pad + 10)) - self.scroll_y;
+            var row = i div _cols;
+            var iy = base_y + (row * y_stride);
             
-            if (iy < (global.camy - (self.item_size + 10)) || iy > global.camy + global.screenh) { continue; }      
+            if (iy < cull_top || iy > cull_bottom) { continue; }      
             
-			var item = self.cached_upgrades[i];
-            if (not item.is_unlocked) { continue; }
+            var item = self.cached_upgrades[i];
+            if (!item.is_unlocked) { continue; }
 
-            var col = i mod self.grid_cols;
-            var ix = global.camx + upgrades_left_pad + (col * (self.item_size + self.item_pad));
+            var col = i mod _cols;
+            var ix = _camx + _left_pad + (col * item_stride);
+            var triggered_b = -1;
             
-            for (var b = 0; b < btn_count; b+=1)
-            {
-                var btn = self.sub_btn_layout[b];
-                var bx = ix + btn.rx;
-                var by = iy + btn.ry;
-                
-                var x1 = bx - 10;
-                var y1 = by - 10;
-                var x2 = bx + 10;
-                var y2 = by + 10;
-                
-                var triggered = false;
-                var btn_unique_id = (i * 10) + b;
-                
-                if (mx >= x1 && mx <= x2 && my >= y1 && my <= y2)
-                {
-                    if (btn.hold)
-                    {
-                        if (click)
-                        {
-                            self.is_held = true;
-                            self.hold_timer = 0;
-                            self.held_btn_id = btn_unique_id;
-                            triggered = true;
-                        }
-                        else if (click_hold && self.held_btn_id == btn_unique_id)
-                        {
-                            self.hold_timer += 1;
-                            var init_delay = 20;
-                            var rep_rate = 3;
-                            
-                            if (self.hold_timer >= init_delay && (self.hold_timer - init_delay) mod rep_rate == 0)
-                            {
-                                triggered = true;
-                            }
+            var bx = ix + 10; var by = iy + _item_size + 10;
+            if (mx >= bx - 10 && mx <= bx + 10 && my >= by - 10 && my <= by + 10) { triggered_b = 0; }
+            else
+			{
+                bx = ix + _item_size - 10; by = iy + _item_size + 10;
+                if (mx >= bx - 10 && mx <= bx + 10 && my >= by - 10 && my <= by + 10) { triggered_b = 1; }
+                else
+				{
+                    bx = ix + _item_size / 2; by = iy + _item_size + 30;
+                    if (mx >= bx - 10 && mx <= bx + 10 && my >= by - 10 && my <= by + 10) { triggered_b = 2; }
+                    else
+					{
+                        bx = ix + 10; by = iy + _item_size + 30;
+                        if (mx >= bx - 10 && mx <= bx + 10 && my >= by - 10 && my <= by + 10) { triggered_b = 3; }
+                        else
+						{
+                            bx = ix + _item_size - 10; by = iy + _item_size + 30;
+                            if (mx >= bx - 10 && mx <= bx + 10 && my >= by - 10 && my <= by + 10) { triggered_b = 4; }
                         }
                     }
-                    else if (click)
+                }
+            }
+
+            if (triggered_b != -1)
+            {
+                var btn_unique_id = (i * 10) + triggered_b;
+                var triggered = false;
+                
+                if (triggered_b != 2) 
+                {
+                    if (click)
                     {
+                        self.is_held = true;
+                        self.hold_timer = 0;
+                        self.held_btn_id = btn_unique_id;
                         triggered = true;
                     }
+                    else if (click_hold && self.held_btn_id == btn_unique_id)
+                    {
+                        self.hold_timer += 1;
+                        if (self.hold_timer >= 20 && (self.hold_timer - 20) mod 3 == 0)
+                        {
+                            triggered = true;
+                        }
+                    }
+                }
+                else if (click)
+                {
+                    triggered = true;
                 }
                 
                 if (triggered)
                 {
                     audio_play_sound(snd_crit, 999, false);
-                    switch (btn.name)
-                    {
-                        case "sub":   if (item.sel_lvl > 0) { item.sel_lvl -= 1; } break;
-                        case "add":   item.sel_lvl += 1; break;
-                        case "reset": item.sel_lvl = 0; break;
-                        case "prev":  if (item.sel_lvl > 0) { item.sel_lvl = max(0, item.sel_lvl - 10); } break;
-                        case "next":  item.sel_lvl += 10; break;
-                    }
+                    if (triggered_b == 0)      { if (item.sel_lvl > 0) { item.sel_lvl -= 1; } }
+                    else if (triggered_b == 1) { item.sel_lvl += 1; }
+                    else if (triggered_b == 2) { item.sel_lvl = 0; }
+                    else if (triggered_b == 3) { if (item.sel_lvl > 0) { item.sel_lvl = max(0, item.sel_lvl - 10); } }
+                    else if (triggered_b == 4) { item.sel_lvl += 10; }
                 }
             }
         }
@@ -2294,118 +2446,72 @@ OnSettingsMenuDraw = function()
 			}
 			
 			var boss_item_size_mult = 1.4;
-			var boss_sprite = boss.sprite;
-            if (boss.sprite != noone) 
-            {							
-                var spr_w = sprite_get_width(boss_sprite);
-                var spr_h = sprite_get_height(boss_sprite);
-                var spr_ox = sprite_get_xoffset(boss_sprite);
-                var spr_oy = sprite_get_yoffset(boss_sprite);
-                
-                var max_side = max(spr_w, spr_h);
-                var target_size = self.boss_item_size * boss_item_size_mult;
-                var dynamic_scale = target_size / max_side;
-                var manual_mod = boss.scale_mod;
-                var final_scale = dynamic_scale * manual_mod;
+			var anim_frame = get_timer() / 100000;
+			var calc_sprite = noone;
 
-                var x_off = boss.x_offset;
-                var y_off = boss.y_offset;
+			if (boss.sprite != noone)
+			{
+				calc_sprite = boss.sprite;
+			}
+			else if (boss.code == "obj_boss_picayune_eye")
+			{
+				calc_sprite = spr_picayune_right_socket;
+			}
+			else if (boss.code == "obj_boss_picayune_full")
+			{
+				var interval = 2;
+				var is_flash = (anim_frame div interval) mod 2;
+				calc_sprite = !is_flash ? global.sprites.spr_picayune_scroll_white : global.sprites.spr_picayune_scroll_yellow;
+			}
 
-                var draw_x = cell_cx - ((spr_w / 2) - spr_ox) * final_scale + x_off;
-                var draw_y = cell_cy - ((spr_h / 2) - spr_oy) * final_scale + y_off;
-
-                var anim_frame = get_timer() / 100000;
+			if (calc_sprite != noone)
+			{
+				var spr_w = sprite_get_width(calc_sprite);
+				var spr_h = sprite_get_height(calc_sprite);
+				var spr_ox = sprite_get_xoffset(calc_sprite);
+				var spr_oy = sprite_get_yoffset(calc_sprite);
 				
-                if (boss.unlocked)
-                {
-                    draw_sprite_ext(boss_sprite, anim_frame, draw_x, draw_y, final_scale, final_scale, 0, c_white, 1);
-					if (boss.code == "obj_boss_true_picayune")
+				var max_side = max(spr_w, spr_h);
+				var target_size = self.boss_item_size * boss_item_size_mult;
+				var dynamic_scale = target_size / max_side;
+				var final_scale = dynamic_scale * boss.scale_mod;
+
+				var draw_x = cell_cx - ((spr_w / 2) - spr_ox) * final_scale + boss.x_offset;
+				var draw_y = cell_cy - ((spr_h / 2) - spr_oy) * final_scale + boss.y_offset;
+				
+				var draw_col = boss.unlocked ? c_white : c_black;
+				var draw_alpha = 1;
+				draw_alpha = boss.code == "obj_boss_picayune_full" && !boss.unlocked ? 0.5 : 1; 
+				
+				if (!boss.unlocked)
+				{
+					draw_sprite_ext(global.sprites.spr_dust_explosion_3, get_timer() / 200000, cell_cx, cell_cy, 0.5, 0.5, 0, c_red, 0.6);
+					draw_sprite_ext(global.sprites.spr_dust_explosion_3, get_timer() / 200000, cell_cx, cell_cy, 1, 1, 0, c_red, 0.6);
+				}
+				
+				if (boss.sprite != noone)
+				{
+					draw_sprite_ext(calc_sprite, anim_frame, draw_x, draw_y, final_scale, final_scale, 0, draw_col, draw_alpha);
+					
+					if (boss.unlocked && boss.code == "obj_boss_true_picayune")
 					{
 						draw_sprite_ext(global.sprites.spr_picayune_hair, anim_frame, draw_x, draw_y - 16, 0.05 * final_scale, 0.05 * final_scale, 1, c_white, 1);
 						draw_sprite_ext(global.sprites.spr_picayune_faces, anim_frame, draw_x, draw_y - 16, 0.05 * final_scale, 0.05 * final_scale, 1, c_white, 0.7);
 					}
 				}
-                else
-                {
-                    draw_sprite_ext(boss_sprite, anim_frame, draw_x, draw_y, final_scale, final_scale, 0, c_black, 0.5);
-                }
-            }
-			else if (boss.code == "obj_boss_picayune_eye")
-			{
-				var spr_w = sprite_get_width(spr_picayune_right_socket);
-				var spr_h = sprite_get_height(spr_picayune_right_socket);
-				var spr_ox = sprite_get_xoffset(spr_picayune_right_socket);
-				var spr_oy = sprite_get_yoffset(spr_picayune_right_socket);
-				
-				var max_side = max(spr_w, spr_h);
-				var target_size = self.boss_item_size * boss_item_size_mult;
-				var dynamic_scale = target_size / max_side;
-				var manual_mod = boss.scale_mod;
-				var final_scale = dynamic_scale * manual_mod;
-
-				var x_off = boss.x_offset;
-				var y_off = boss.y_offset;
-
-				var draw_x = cell_cx - ((spr_w / 2) - spr_ox) * final_scale + x_off;
-				var draw_y = cell_cy - ((spr_h / 2) - spr_oy) * final_scale + y_off;
-				
-				var posx = random_range(-0.2, 0.7);
-				var posy = random_range(-0.2, 0.7);
-				
-				if (boss.unlocked)
-				{			
-					draw_sprite_ext(global.sprites.spr_picayune_right_socket, 0, draw_x + posx, draw_y + posy, final_scale, final_scale, 0, c_white, 1);
-					draw_sprite_ext(global.sprites.spr_picayune_right_eye, 0, draw_x + posx, draw_y + posy, final_scale, final_scale, 0, c_white, 1);
-					draw_sprite_ext(global.sprites.spr_picayune_right_pupil, 0, draw_x + posx, draw_y + posy, final_scale, final_scale, 0, c_white, 1);				
-				}
-				else
+				else if (boss.code == "obj_boss_picayune_eye")
 				{
-					draw_sprite_ext(global.sprites.spr_picayune_right_socket, 0, draw_x + posx, draw_y + posy, final_scale, final_scale, 0, c_black, 0.5);
-					draw_sprite_ext(global.sprites.spr_picayune_right_eye, 0, draw_x + posx, draw_y + posy, final_scale, final_scale, 0, c_black, 0.5);
-					draw_sprite_ext(global.sprites.spr_picayune_right_pupil, 0, draw_x + posx, draw_y + posy, final_scale, final_scale, 0, c_black, 0.5);								
+					var posx = random_range(-0.2, 0.7);
+					var posy = random_range(-0.2, 0.7);
+					
+					draw_sprite_ext(global.sprites.spr_picayune_right_socket, 0, draw_x + posx, draw_y + posy, final_scale, final_scale, 0, draw_col, draw_alpha);
+					draw_sprite_ext(global.sprites.spr_picayune_right_eye, 0, draw_x + posx, draw_y + posy, final_scale, final_scale, 0, draw_col, draw_alpha);
+					draw_sprite_ext(global.sprites.spr_picayune_right_pupil, 0, draw_x + posx, draw_y + posy, final_scale, final_scale, 0, draw_col, draw_alpha);
 				}
-			}
-			else if (boss.code == "obj_boss_picayune_full")
-			{
-				var anim_frame_sec = get_timer() / 100000;
-				var interval = 2;
-				var is_flash = (anim_frame_sec div interval) mod 2;
-				if (!is_flash)
+				else if (boss.code == "obj_boss_picayune_full")
 				{
-					boss_sprite = global.sprites.spr_picayune_scroll_white;
+					draw_sprite_ext(calc_sprite, anim_frame, draw_x, draw_y, final_scale, final_scale, 0, draw_col, draw_alpha);
 				}
-				else
-				{
-					boss_sprite = global.sprites.spr_picayune_scroll_yellow;
-				}
-
-                var spr_w = sprite_get_width(boss_sprite);
-                var spr_h = sprite_get_height(boss_sprite);
-                var spr_ox = sprite_get_xoffset(boss_sprite);
-                var spr_oy = sprite_get_yoffset(boss_sprite);
-                
-                var max_side = max(spr_w, spr_h);
-                var target_size = self.boss_item_size * boss_item_size_mult;
-                var dynamic_scale = target_size / max_side;
-                var manual_mod = boss.scale_mod;
-                var final_scale = dynamic_scale * manual_mod;
-
-                var x_off = boss.x_offset;
-                var y_off = boss.y_offset;
-
-                var draw_x = cell_cx - ((spr_w / 2) - spr_ox) * final_scale + x_off;
-                var draw_y = cell_cy - ((spr_h / 2) - spr_oy) * final_scale + y_off;
-
-                var anim_frame = get_timer() / 100000;
-				
-                if (boss.unlocked)
-                {
-                    draw_sprite_ext(boss_sprite, anim_frame, draw_x, draw_y, final_scale, final_scale, 0, c_white, 1);
-				}
-                else
-                {
-                    draw_sprite_ext(boss_sprite, anim_frame, draw_x, draw_y, final_scale, final_scale, 0, c_black, 0.5);
-                }				
 			}
 			
             draw_set_font(fnt_freddy);
@@ -2420,8 +2526,8 @@ OnSettingsMenuDraw = function()
             outline_text(b_name, cell_cx, iy + self.boss_item_size + 13, text_col, 0, 1, -1, 9999);
         }
 	}
-    else if (self.db_ref.current_tab == "UPGRADES")
-	{
+	else if (self.db_ref.current_tab == "UPGRADES")
+    {
 		var is_enabled_vanilla_lvls = global.GodHome.global_settings.isUseVanillaEquipSystem;
 		var vanilla_equip_color = is_enabled_vanilla_lvls ? c_lime : c_red;
 		if (instance_exists(self.labelLvlAmountValue))
@@ -2445,153 +2551,105 @@ OnSettingsMenuDraw = function()
 		{
 			self.arrowLvlAmountSub.image_blend = vanilla_equip_color; 
 		}
-	
-		var _camx = global.camx;
-		var _camy = global.camy;
-		var _screenh = global.screenh;
-		var _scroll_y = self.scroll_y;
-		var _item_size = self.item_size;
-		var _pad = self.item_pad;
-		var _cols = self.grid_cols;
-		var _left_pad = self.upgrades_left_pad;
-		var _layout = self.sub_btn_layout;
-		var _btn_count = array_length(_layout);
-		var anim_frame = get_timer() / 100000;
+    
+        var _camx = global.camx;
+        var _camy = global.camy;
+        var _screenh = global.screenh;
+        var _scroll_y = self.scroll_y;
+        var _item_size = self.item_size;
+        var _pad = self.item_pad;
+        var _cols = self.grid_cols;
+        var _left_pad = self.upgrades_left_pad;
+        var anim_frame = get_timer() / 100000;
+        
+        var base_y = _camy + 100 - _scroll_y;
+        var item_stride = _item_size + _pad;
+        var y_stride = item_stride + 10;
+        var cull_top = _camy - (_item_size + 10);
+        var cull_bottom = _camy + _screenh;
+        var half_size = _item_size / 2;
+        var text_y_pos = _item_size + 13;
+        var total_items = array_length(self.cached_upgrades);
+
+        for (var i = 0; i < total_items; i += 1)
+        {       
+            var row = i div _cols;
+            var iy = base_y + (row * y_stride);
+            if (iy < cull_top || iy > cull_bottom) { continue; }         
+            
+            var item = self.cached_upgrades[i];
+            var col = i mod _cols;
+            var ix = _camx + _left_pad + (col * item_stride);
+            
+            var alpha = item.is_unlocked ? 1 : 0.7;
+            var color = item.is_unlocked ? c_white : c_black;
+            var frame = anim_frame;
+			if (!item.is_unlocked)
+			{
+				gpu_set_fog(true, c_red, 0, 0);
+				draw_sprite_ext(item.spr, frame, ix + half_size, iy + half_size, 0.7, 0.7, 0, c_white, 0.7);
+				gpu_set_fog(false, c_black, 0, 0);				
+			}
+            draw_sprite_ext(item.spr, frame, ix + half_size, iy + half_size, 0.6, 0.6, 0, color, alpha);
+        }
+
+        draw_set_font(fnt_freddy);
+        draw_set_halign(fa_center);
+        draw_set_color(c_black);
 		
-		var base_y = _camy + 100 - _scroll_y;
-		var item_stride = _item_size + _pad;
-		var y_stride = item_stride + 10;
-		var cull_top = _camy - (_item_size + 10);
-		var cull_bottom = _camy + _screenh;
-		var half_size = _item_size / 2;
-		var text_y_pos = _item_size + 13;
-		var total_items = equip_list_order_len;
+        for (var i = 0; i < total_items; i += 1)
+        {       
+            var row = i div _cols;
+            var iy = base_y + (row * y_stride);
+            if (iy < cull_top || iy > cull_bottom) { continue; }         
+            
+            var item = self.cached_upgrades[i];
+            var col = i mod _cols;
+            var ix = _camx + _left_pad + (col * item_stride);
+            
+            if (item.is_unlocked)
+            {
+                draw_set_color((item.sel_lvl > 0) ? c_lime : c_red);
+                draw_text(ix + half_size, iy + text_y_pos, string(item.sel_lvl));
+            }
+            else
+            {
+                draw_set_color(c_red);
+                draw_text(ix + half_size, iy + text_y_pos + 15, "???");
+            }
+        }
 
-		for (var i = 0; i < total_items; i+=1)
-		{       
-			var row = i div _cols;
-			var iy = base_y + (row * y_stride);
-			if (iy < cull_top || iy > cull_bottom) { continue; }         
-			
-			var item = self.cached_upgrades[i];
-			var col = i mod _cols;
-			var ix = _camx + _left_pad + (col * item_stride);
-			
-			var alpha = item.is_unlocked ? 1 : 0.5;
-			var color = item.is_unlocked ? c_white : c_black;
-			var frame = item.is_unlocked ? anim_frame : 0;
-			draw_sprite_ext(item.spr, frame, ix + half_size, iy + half_size, 0.6, 0.6, 0, color, alpha);
-		}
+        draw_set_font(fnt_cambria);
+        draw_set_color(c_white);
+        draw_set_halign(fa_center);
 
-		//Experimental optimisation by swapping outline_text to the text wrap
-		draw_set_font(fnt_freddy);
-		for (var i = 0; i < total_items; i+=1)
-		{       
-			var row = i div _cols;
-			var iy = base_y + (row * y_stride);
-			if (iy < cull_top || iy > cull_bottom) { continue; }         
-			
-			var item = self.cached_upgrades[i];
-			var col = i mod _cols;
-			var ix = _camx + _left_pad + (col * item_stride);
-			
-			if (item.is_unlocked)
-			{
-				var txt = string(item.sel_lvl);
-				var tx = ix + half_size;
-				var ty = iy + text_y_pos;
-				var inner_col = (item.sel_lvl > 0) ? c_lime : c_red;
-				
-				draw_set_color(c_black);
-				draw_text(tx - 1, ty, txt);
-				draw_text(tx + 1, ty, txt);
-				draw_text(tx, ty - 1, txt);
-				draw_text(tx, ty + 1, txt);
-				
-				draw_set_color(inner_col);
-				draw_text(tx, ty, txt);
-			}
-			else
-			{
-				draw_set_color(c_red);
-				draw_text(ix + half_size, iy + half_size, "???");
-			}
-		}
-		draw_set_color(c_white);
+        var rx1 = 10; var ry1 = _item_size + 10;
+        var rx2 = _item_size - 10; var ry2 = _item_size + 10;
+        var rx3 = _item_size / 2; var ry3 = _item_size + 29;
+        var rx4 = 10; var ry4 = _item_size + 30;
+        var rx5 = _item_size - 10; var ry5 = _item_size + 30;
+
+        for (var i = 0; i < total_items; i += 1)
+        {       
+            var row = i div _cols;
+            var iy = base_y + (row * y_stride);
+            if (iy < cull_top || iy > cull_bottom) { continue; }         
+            
+            var item = self.cached_upgrades[i];
+            if (!item.is_unlocked) { continue; }
+            
+            var col = i mod _cols;
+            var ix = _camx + _left_pad + (col * item_stride);
+            
+            draw_text(ix + rx1, iy + ry1, "-");
+            draw_text(ix + rx2, iy + ry2, "+");
+            draw_text(ix + rx3, iy + ry3, "x");
+            draw_text(ix + rx4, iy + ry4, "<<");
+            draw_text(ix + rx5, iy + ry5, ">>");
+        }
 		
-		/* Old pass 2 code
-		draw_set_font(fnt_freddy);
-		for (var i = 0; i < total_items; i+=1)
-		{       
-			var row = i div _cols;
-			var iy = base_y + (row * y_stride);
-			if (iy < cull_top || iy > cull_bottom) { continue; }         
-			
-			var item = _list[$ _order[i]];
-			var col = i mod _cols;
-			var ix = _camx + _left_pad + (col * item_stride);
-			
-			if (item.is_unlocked)
-			{
-				var is_more_than_zero = item.sel_lvl > 0;
-				outline_text(string(item.sel_lvl), ix + half_size, iy + text_y_pos, is_more_than_zero ? c_lime : c_red, 0, 1, -1, 9999);
-			}
-			else
-			{
-				draw_text_color(ix + half_size, iy + half_size, "???", c_red, c_red, c_red, c_red, 1);
-			}
-		}
-		
-		*/
-
-		draw_set_font(fnt_cambria);		
-		var rx1 = 10; ry1 = _item_size + 10; lbl1 = "-";
-		var rx2 = _item_size - 10; ry2 = _item_size + 10; lbl2 = "+";
-		var rx3 = _item_size / 2; ry3 = _item_size + 30; lbl3 = "x";
-		var rx4 = 10; ry4 = _item_size + 30; lbl4 = "<<";
-		var rx5 = _item_size - 10; ry5 = _item_size + 30; lbl5 = ">>";
-
-		for (var i = 0; i < total_items; i+=1)
-		{       
-			var row = i div _cols;
-			var iy = base_y + (row * y_stride);
-			if (iy < cull_top || iy > cull_bottom) { continue; }         
-			
-			var item = self.cached_upgrades[i];
-			if (not item.is_unlocked) { continue; }
-			
-			var col = i mod _cols;
-			var ix = _camx + _left_pad + (col * item_stride);
-			
-			draw_text(ix + rx1, iy + ry1, lbl1);
-			draw_text(ix + rx2, iy + ry2, lbl2);
-			draw_text(ix + rx3, iy + ry3, lbl3);
-			draw_text(ix + rx4, iy + ry4, lbl4);
-			draw_text(ix + rx5, iy + ry5, lbl5);
-		}
-
-		/* Old pass 3 code
-		draw_set_font(fnt_cambria);
-		for (var i = 0; i < total_items; i+=1)
-		{       
-			var row = i div _cols;
-			var iy = base_y + (row * y_stride);
-			if (iy < cull_top || iy > cull_bottom) { continue; }         
-			
-			var item = self.cached_upgrades[i];
-			if (not item.is_unlocked) { continue; }
-			
-			var col = i mod _cols;
-			var ix = _camx + _left_pad + (col * item_stride);
-			
-			for (var b = 0; b < _btn_count; b+=1)
-			{
-				var btn = _layout[b];
-				draw_text(ix + btn.rx, iy + btn.ry, btn.label);
-			}
-		}
-		*/
-	}
+		draw_set_halign(fa_left);
+    }
 	
 	draw_text_setup(16777215, 1, 1, fnt_cambria);
     var tab_w = 120; 
@@ -2606,6 +2664,11 @@ OnSettingsMenuDraw = function()
         draw_set_alpha(1);
     }	
     draw_text_reset();
+	
+	var hover_alph = self.btnCloseHover ? 0.6 : 1;
+	var draw_x = global.camx + self.btnCloseX;
+	var draw_y = global.camy + self.btnCloseY;
+	draw_sprite_ext(global.sprites.spr_skilltree_close, 0, draw_x, draw_y, 1, 1, 0, c_white, hover_alph);
 }
 
 OnSettingsMenuTabChange = function(OldTab, NewTab)
@@ -2677,7 +2740,7 @@ OnSettingsMenuTabChange = function(OldTab, NewTab)
 		if (!instance_exists(self.labelBossAnountReset))
 		{
 			self.labelBossAnountReset = global.GodHome.CreateModMenuObject(85, 185, -350, global.GodHome.MenuObjectType.MenuLabel);
-			self.labelBossAnountReset.text = "Set to 0";
+			self.labelBossAnountReset.text = "Set to 1";
 			self.labelBossAnountReset.OnLabelClick = method(labelBossAnountReset, global.GodHome.ResetBossAmountVar);			
 		}
 		if (!instance_exists(self.labelBossAmountValue))
@@ -2699,6 +2762,20 @@ OnSettingsMenuTabChange = function(OldTab, NewTab)
 			self.arrowBossAmountAdd.OnArrowClick = method(arrowBossAmountAdd, global.GodHome.IncreaseBossAmountVar);
 			self.arrowBossAmountAdd.OnArrowHoldTick = method(arrowBossAmountAdd, global.GodHome.IncreaseBossAmountVar);				
 		}		
+		if (!instance_exists(self.godHomeToggleBossUnlockCheat))
+		{
+			self.godHomeToggleBossUnlockCheat = global.GodHome.CreateModMenuObject(40, 225, -350, global.GodHome.MenuObjectType.MenuToggleButton);	
+			self.godHomeToggleBossUnlockCheat.sprite_index = global.sprites.spr_skilltree_icos;
+			self.godHomeToggleBossUnlockCheat.spr_subind = 83;
+			self.godHomeToggleBossUnlockCheat.title = "CHEAT: Unlock locked bosses";
+			self.godHomeToggleBossUnlockCheat.description = "Allows you to play versus bosses that you haven't yet defeated in normal gameplay.";
+			self.godHomeToggleBossUnlockCheat.is_rainbow = true;
+			self.godHomeToggleBossUnlockCheat.is_rainbow_sprite = true;
+			self.godHomeToggleBossUnlockCheat.OnToggleButtonClick = method(self.godHomeToggleBossUnlockCheat, global.GodHome.CheatRefreshBossesUnlock);
+			self.godHomeToggleBossUnlockCheat.variable_structure = global.GodHome.global_settings;
+			self.godHomeToggleBossUnlockCheat.variable_name = "isCheatUnlockAllBosses";
+			self.godHomeToggleBossUnlockCheat.toggled = global.GodHome.global_settings.isCheatUnlockAllBosses;		
+		}
 	}	
 	else if (NewTab == "UPGRADES")
 	{
@@ -2761,6 +2838,8 @@ OnSettingsMenuTabChange = function(OldTab, NewTab)
 			self.labelItemsSubBig.image_yscale = 1;
 			self.labelItemsSubBig.is_clickable = true;
 			self.labelItemsSubBig.is_holdable = true;
+			self.labelItemsSubBig.initial_repeat_delay = 20;
+			self.labelItemsSubBig.hold_repeate_rate = 3;
 			self.labelItemsSubBig.OnLabelClick = method(labelItemsSubBig, global.GodHome.DecreaseBigItemsAmountVar);
 			self.labelItemsSubBig.OnLabelHoldTick = method(labelItemsSubBig, global.GodHome.DecreaseBigItemsAmountVar);
 			self.labelItemsSubBig.halign = fa_center;		
@@ -2774,6 +2853,8 @@ OnSettingsMenuTabChange = function(OldTab, NewTab)
 			self.labelItemsSub.image_yscale = 1;
 			self.labelItemsSub.is_clickable = true;
 			self.labelItemsSub.is_holdable = true;
+			self.labelItemsSub.initial_repeat_delay = 20;
+			self.labelItemsSub.hold_repeate_rate = 3;
 			self.labelItemsSub.OnLabelClick = method(labelItemsSub, global.GodHome.DecreaseItemsAmountVar);
 			self.labelItemsSub.OnLabelHoldTick = method(labelItemsSub, global.GodHome.DecreaseItemsAmountVar);
 			self.labelItemsSub.halign = fa_center;			
@@ -2798,6 +2879,8 @@ OnSettingsMenuTabChange = function(OldTab, NewTab)
 			self.labelItemsAdd.image_yscale = 1;
 			self.labelItemsAdd.is_clickable = true;
 			self.labelItemsAdd.is_holdable = true;
+			self.labelItemsAdd.initial_repeat_delay = 20;
+			self.labelItemsAdd.hold_repeate_rate = 3;
 			self.labelItemsAdd.OnLabelClick = method(labelItemsAdd, global.GodHome.IncreaseItemsAmountVar);
 			self.labelItemsAdd.OnLabelHoldTick = method(labelItemsAdd, global.GodHome.IncreaseItemsAmountVar);
 			self.labelItemsAdd.halign = fa_center;	
@@ -2811,9 +2894,25 @@ OnSettingsMenuTabChange = function(OldTab, NewTab)
 			self.labelItemsAddBig.image_yscale = 1;			
 			self.labelItemsAddBig.is_clickable = true;
 			self.labelItemsAddBig.is_holdable = true;
+			self.labelItemsAddBig.initial_repeat_delay = 20;
+			self.labelItemsAddBig.hold_repeate_rate = 3;
 			self.labelItemsAddBig.OnLabelClick = method(labelItemsAddBig, global.GodHome.IncreaseBigItemsAmountVar);
 			self.labelItemsAddBig.OnLabelHoldTick = method(labelItemsAddBig, global.GodHome.IncreaseBigItemsAmountVar);			
 			self.labelItemsAddBig.halign = fa_center;	
+		}
+		if (!instance_exists(self.godHomeToggleEquipUnlockCheat))
+		{
+			self.godHomeToggleEquipUnlockCheat = global.GodHome.CreateModMenuObject(45, 250, -350, global.GodHome.MenuObjectType.MenuToggleButton);	
+			self.godHomeToggleEquipUnlockCheat.sprite_index = global.sprites.spr_skilltree_icos;
+			self.godHomeToggleEquipUnlockCheat.spr_subind = 83;
+			self.godHomeToggleEquipUnlockCheat.title = "CHEAT: Unlock locked equipment";
+			self.godHomeToggleEquipUnlockCheat.description = "Allows you to play with equipment that you haven't yet unlocked in normal gameplay.";
+			self.godHomeToggleEquipUnlockCheat.is_rainbow = true;
+			self.godHomeToggleEquipUnlockCheat.OnToggleButtonClick = self.CheatRefreshEquipUnlock;
+			self.godHomeToggleEquipUnlockCheat.is_rainbow_sprite = true;
+			self.godHomeToggleEquipUnlockCheat.variable_structure = global.GodHome.global_settings;
+			self.godHomeToggleEquipUnlockCheat.variable_name = "isCheatUnlockAllEquip";
+			self.godHomeToggleEquipUnlockCheat.toggled = global.GodHome.global_settings.isCheatUnlockAllEquip;		
 		}
 	}
 	if (OldTab == "MAIN")
@@ -2878,6 +2977,11 @@ OnSettingsMenuTabChange = function(OldTab, NewTab)
 			instance_destroy(self.arrowBossAmountSub);
 			self.arrowBossAmountSub = noone;		
 		}	
+		if (instance_exists(self.godHomeToggleBossUnlockCheat))
+		{
+			instance_destroy(self.godHomeToggleBossUnlockCheat);
+			self.godHomeToggleBossUnlockCheat = noone;		
+		}	
 	}
 	else if (OldTab == "UPGRADES")
 	{
@@ -2940,7 +3044,12 @@ OnSettingsMenuTabChange = function(OldTab, NewTab)
 		{
 			instance_destroy(self.labelItemsReset);
 			self.labelItemsReset = noone;		
-		}			
+		}
+		if (instance_exists(self.godHomeToggleEquipUnlockCheat))
+		{
+			instance_destroy(self.godHomeToggleEquipUnlockCheat);
+			self.godHomeToggleEquipUnlockCheat = noone;		
+		}	
 	}
 }
 
@@ -3249,11 +3358,11 @@ OnMenuToggleButtonCreate = function()
 	hold_timer = 30;
 	ico_blend = 16777215;
 	is_rainbow = false;
+	is_rainbow_sprite = false;
 	
 	OnCustomStep = noone;
 	OnCustomDraw = noone;
-	OnButtonHold = noone;
-	OnButtonClick = noone;	
+	OnToggleButtonClick = noone;	
 }
 
 OnMenuToggleButtonStep = function()
@@ -3321,7 +3430,7 @@ OnMenuToggleButtonDraw = function()
 				image_yscale = 0.25;
 				playsnd(global.sounds.snd_opt_toggle_true, 1, 0, 1);
 				
-				if (OnButtonClick != noone) { OnButtonClick() };
+				if (OnToggleButtonClick != noone) { OnToggleButtonClick() };
 			}
 			else
 			{
@@ -3334,6 +3443,8 @@ OnMenuToggleButtonDraw = function()
 				{
 					variable_structure[$ variable_name] = toggled;
 				}
+				
+				if (OnToggleButtonClick != noone) { OnToggleButtonClick() };
 			}
 		}
 	}
@@ -3358,11 +3469,19 @@ OnMenuToggleButtonDraw = function()
 		image_yscale = approach(image_yscale, 1, 0.1);
 		
 		ico_blend = hovering ? 16777215 : 8421504;
-	}
-		
+	}	
+	
 	draw_sprite_ext(global.sprites.spr_skilltree_box, 0, x, y, image_xscale, image_yscale, 0, c_black, 1);
 	draw_sprite_ext(global.sprites.spr_skilltree_box, 0, x, y, image_xscale, image_yscale, 0, c_white, hover_alph);
 	draw_sprite_ext(sprite_index, spr_subind, x, y, image_xscale, image_yscale, 0, ico_blend, 1);
+
+	if (toggled && is_rainbow_sprite)
+	{
+		var sprite_col = c_rainbow(get_timer() / 10000);
+		gpu_set_fog(true, sprite_col, 0, 0);    
+		draw_sprite_ext(global.sprites.spr_skilltree_box, 0, x, y, image_xscale, image_yscale, 0, c_white, 0.5);
+		gpu_set_fog(false, c_white, 0, 0);
+	}
 
 	if (hovering)
 	{
@@ -3402,7 +3521,7 @@ OnMenuToggleButtonDraw = function()
 ////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////
-//MenuToggleButton//
+//MenuLabel//
 
 OnMenuLabelCreate = function()
 {
